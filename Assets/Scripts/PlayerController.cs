@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
         {
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, 10);
         }
-        if (transform.position.y < -6)
+        if (transform.position.y < -8)
         {
             if (transform.position.x < 2)
             {
@@ -36,6 +36,14 @@ public class PlayerController : MonoBehaviour
             {
                 transform.position = new Vector2(2, 2);
             }
+        }
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.name == "EnemyDamage")
+        {
+            transform.position = new Vector2(-22, -2);
         }
     }
 }
