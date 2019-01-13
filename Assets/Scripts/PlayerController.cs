@@ -28,14 +28,7 @@ public class PlayerController : MonoBehaviour
         }
         if (transform.position.y < -8)
         {
-            if (transform.position.x < 2)
-            {
-                transform.position = new Vector2(-5, 2);
-            }
-            else
-            {
-                transform.position = new Vector2(2, 2);
-            }
+            transform.position = new Vector2(transform.position.x - 5, 2);
         }
     }
 
@@ -43,7 +36,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.name == "EnemyDamage")
         {
-            transform.position = new Vector2(-22, -2);
+            transform.position = new Vector2(transform.position - 2, -2);
         }
     }
 }
