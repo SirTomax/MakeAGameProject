@@ -30,12 +30,26 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKey("right"))
         {
             sprite.flipX = false;
-            rigidBody.velocity = new Vector2(5, rigidBody.velocity.y);
+            if (Input.GetKey("left shift"))
+            {
+                rigidBody.velocity = new Vector2(10, rigidBody.velocity.y);
+            }
+            else
+            {
+                rigidBody.velocity = new Vector2(5, rigidBody.velocity.y);
+            }
         }
         if (Input.GetKey("left"))
         {
             sprite.flipX = true;
-            rigidBody.velocity = new Vector2(-5, rigidBody.velocity.y);
+            if (Input.GetKey("left shift"))
+            {
+                rigidBody.velocity = new Vector2(-10, rigidBody.velocity.y);
+            }
+            else
+            {
+                rigidBody.velocity = new Vector2(-5, rigidBody.velocity.y);
+            }
         }
         if (groundCollision)
         {
