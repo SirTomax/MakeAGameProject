@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
     public float groundCheckRadius;
     private bool groundCollision;
     private bool doubleJumped;
+    public CanvasGroup canvasYouWin;
 
     void Start()
     {
@@ -60,6 +61,10 @@ public class PlayerController : MonoBehaviour
         if (other.name == "EnemyDamage")
         {
             transform.position = new Vector2(transform.position.x - 5, -2);
+        }
+        else if (other.name == "Exit")
+        {
+            canvasYouWin.alpha = 1;
         }
     }
 }
