@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class PlayerController : MonoBehaviour
     private bool groundCollision;
     private bool doubleJumped;
     public CanvasGroup canvasYouWin;
+    private int lives = 3;
 
     void Start()
     {
@@ -66,7 +68,12 @@ public class PlayerController : MonoBehaviour
         }
         if (transform.position.y < -8)
         {
+            lives -= 1;
             transform.position = new Vector2(transform.position.x - 5, 2);
+        }
+        if (lives == 0)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
     }
 
@@ -74,6 +81,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.name == "EnemyDamage")
         {
+            lives -= 1;
             transform.position = new Vector2(transform.position.x - 5, -2);
         }
         else if (other.name == "Exit")
