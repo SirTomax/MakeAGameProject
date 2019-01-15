@@ -5,9 +5,20 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
 
+    public SpriteRenderer sprite;
+    public LayerMask groundLayer;
+    public Transform groundCheck;
+    public float groundCheckRadius;
+    private bool groundCollision;
+
     void Start()
     {
 
+    }
+
+    void FixedUpdate()
+    {
+        groundCollision = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
     }
 
     void Update()
@@ -16,13 +27,15 @@ public class PlayerController : MonoBehaviour
         var transform = GetComponent<Transform>();
         if (Input.GetKey("right"))
         {
+            sprite.flipX = false;
             rigidBody.velocity = new Vector2(5, rigidBody.velocity.y);
         }
         if (Input.GetKey("left"))
         {
+            sprite.flipX = true;
             rigidBody.velocity = new Vector2(-5, rigidBody.velocity.y);
         }
-        if (Input.GetKeyDown("space"))
+        if (Input.GetKeyDown("space") && groundCollision)
         {
             rigidBody.velocity = new Vector2(rigidBody.velocity.x, 10);
         }
@@ -36,7 +49,7 @@ public class PlayerController : MonoBehaviour
     {
         if (other.name == "EnemyDamage")
         {
-            transform.position = new Vector2(transform.position - 2, -2);
+            transform.position = new Vector2(transform.position.x - 5, -2);
         }
     }
 }
