@@ -16,6 +16,8 @@ public class PlayerController : MonoBehaviour
     public CanvasGroup canvasYouWin;
     private int lives = 3;
     public Text livesText;
+    public float targetTime = 60.0f;
+    public Text timerText;
 
     void Start()
     {
@@ -78,6 +80,18 @@ public class PlayerController : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+
+        if (canvasYouWin.alpha == 0)
+        {
+            targetTime -= Time.deltaTime;
+        }
+        
+        SetTimerText();
+        if (targetTime <= 0.0f)
+        {
+            TimerEnded();
+        }
+
     }
 
     public void OnTriggerEnter2D(Collider2D other)
@@ -98,4 +112,15 @@ public class PlayerController : MonoBehaviour
     {
         livesText.text = "Lives:   " + lives.ToString();
     }
+
+    void TimerEnded()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    void SetTimerText()
+    {
+        timerText.text = "Timer:   " + targetTime.ToString();
+    }
+
 }
