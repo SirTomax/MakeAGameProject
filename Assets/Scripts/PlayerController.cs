@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,10 +15,11 @@ public class PlayerController : MonoBehaviour
     private bool doubleJumped;
     public CanvasGroup canvasYouWin;
     private int lives = 3;
+    public Text livesText;
 
     void Start()
     {
-
+        SetLivesText();
     }
 
     void FixedUpdate()
@@ -69,6 +71,7 @@ public class PlayerController : MonoBehaviour
         if (transform.position.y < -8)
         {
             lives -= 1;
+            SetLivesText();
             transform.position = new Vector2(transform.position.x - 5, 2);
         }
         if (lives == 0)
@@ -82,11 +85,17 @@ public class PlayerController : MonoBehaviour
         if (other.name == "EnemyDamage")
         {
             lives -= 1;
+            SetLivesText();
             transform.position = new Vector2(transform.position.x - 5, -2);
         }
         else if (other.name == "Exit")
         {
             canvasYouWin.alpha = 1;
         }
+    }
+
+    void SetLivesText()
+    {
+        livesText.text = "Lives:   " + lives.ToString();
     }
 }
